@@ -70,7 +70,7 @@ export default {
                 {field: 'content', title: '弹幕内容', width: '230',titleAlign: 'center',columnAlign:'center'}
             ],
             yhTime:0,
-            dmTime:'day-1'
+            dmTime:'day_1'
         }
     },
     components:{
