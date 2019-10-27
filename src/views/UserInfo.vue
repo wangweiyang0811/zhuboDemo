@@ -35,10 +35,10 @@
             弹幕信息
             <div class="sel_title">查询周期:
                 <select class="sel" name="" @change="selDanmu" v-model="dmTime"  id="">
-                    <option value="days_1">一天</option>
-                    <option value="days_7">七天</option>
-                    <option value="days_30">一个月</option>
-                    <option value="days_all">全部</option>
+                    <option value="day_1">一天</option>
+                    <option value="day_7">七天</option>
+                    <option value="day_30">一个月</option>
+                    <option value="day_all">全部</option>
                 </select>
             </div>
         </div>
