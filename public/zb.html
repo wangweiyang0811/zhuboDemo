@@ -1,0 +1,104 @@
+﻿
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link href="css/mui.min.css" rel="stylesheet" />
+<style id="__WXWORK_INNER_SCROLLBAR_CSS">::-webkit-scrollbar { width: 12px !important; height: 12px !important; }::-webkit-scrollbar-track:vertical {  }::-webkit-scrollbar-thumb:vertical { background-color: rgba(136, 141, 152, 0.5) !important; border-radius: 10px !important; background-clip: content-box !important; border:2px solid transparent !important; } ::-webkit-scrollbar-track:horizontal {  }::-webkit-scrollbar-thumb:horizontal { background-color: rgba(136, 141, 152, 0.5) !important; border-radius: 10px !important; background-clip: content-box !important; border:2px solid transparent !important; } ::-webkit-resizer { display: none !important; }
+</style>
+<title>
+
+</title></head>
+<body>
+    <form method="post" action="./Default.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE2NTEyNjc2NzlkZLVY3ef6aw9BoqKDkAROoecjFRETaRuzUC+XVas71nvc" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="0188DED5" />
+</div>
+        <div class="mui-content">
+
+            <h2 style="margin-left: 30px; margin-top: 30px; margin-bottom: 15px; color: #000003; font-weight: 400">经验计算工具：斗鱼主播等级</h2>
+            <p style="margin-left: 30px;">用于计算升级所需经验</p>
+            <div style="margin-top: 50px" class="mui-content-padded">
+
+                <h5 style="clear: left;">起始等级：<span id='block-range-begin-val'>0</span></h5>
+                <div class="el-slider">
+                    <input type="range" id='block-range-begin' value="0" min="0" max="100" />
+                </div>
+                <h5 style="clear: left;">目标等级：<span id='block-range-end-val'>30</span></h5>
+                <div class="el-slider">
+                    <input type="range" id='block-range-end' value="30" min="0" max="100" />
+                </div>
+                <div style="text-align: center; margin-top: 20px">
+                    <p>所需经验</p>
+                    <label id="total">0</label>
+                </div>
+                <div id="huojiancount" style="text-align: center; margin-top: 20px">
+                    相当于
+                    <img src=".\timg.jpg" />
+                    *
+                    <label id="huojiancunt">0</label>
+                </div>
+
+                <div style="display:none;text-align:center;margin-top:50px">
+                    <p><a href="../../experience/Default.aspx">快速升级，省钱省力，戳我！</a></p>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--  <div >
+        <a href="./index.html" id="bottom">点击跳转到斗鱼用户等级页面</a>
+
+    </div> -->
+    <!-- <script type="text/javascript" src="js/mui.js"></script> -->
+    <script type="text/javascript">
+        //监听input事件，获取range的value值，也可以直接element.value获取该range的值
+        var expressList = [{"ny_name":1,"ny_next_level":2,"ny_express":100},{"ny_name":2,"ny_next_level":3,"ny_express":250},{"ny_name":3,"ny_next_level":4,"ny_express":450},{"ny_name":4,"ny_next_level":5,"ny_express":700},{"ny_name":5,"ny_next_level":6,"ny_express":1000},{"ny_name":6,"ny_next_level":7,"ny_express":1350},{"ny_name":7,"ny_next_level":8,"ny_express":1750},{"ny_name":8,"ny_next_level":9,"ny_express":2200},{"ny_name":9,"ny_next_level":10,"ny_express":2700},{"ny_name":10,"ny_next_level":11,"ny_express":3700},{"ny_name":11,"ny_next_level":12,"ny_express":4800},{"ny_name":12,"ny_next_level":13,"ny_express":6000},{"ny_name":13,"ny_next_level":14,"ny_express":7300},{"ny_name":14,"ny_next_level":15,"ny_express":8700},{"ny_name":15,"ny_next_level":16,"ny_express":10200},{"ny_name":16,"ny_next_level":17,"ny_express":11800},{"ny_name":17,"ny_next_level":18,"ny_express":13400},{"ny_name":18,"ny_next_level":19,"ny_express":15000},{"ny_name":19,"ny_next_level":20,"ny_express":17000},{"ny_name":20,"ny_next_level":21,"ny_express":22000},{"ny_name":21,"ny_next_level":22,"ny_express":28000},{"ny_name":22,"ny_next_level":23,"ny_express":35000},{"ny_name":23,"ny_next_level":24,"ny_express":43000},{"ny_name":24,"ny_next_level":25,"ny_express":52000},{"ny_name":25,"ny_next_level":26,"ny_express":62000},{"ny_name":26,"ny_next_level":27,"ny_express":72647},{"ny_name":27,"ny_next_level":28,"ny_express":84670},{"ny_name":28,"ny_next_level":29,"ny_express":97874},{"ny_name":29,"ny_next_level":30,"ny_express":111858},{"ny_name":30,"ny_next_level":31,"ny_express":121810},{"ny_name":31,"ny_next_level":32,"ny_express":132697},{"ny_name":32,"ny_next_level":33,"ny_express":144465},{"ny_name":33,"ny_next_level":34,"ny_express":157654},{"ny_name":34,"ny_next_level":35,"ny_express":171691},{"ny_name":35,"ny_next_level":36,"ny_express":186644},{"ny_name":36,"ny_next_level":37,"ny_express":202399},{"ny_name":37,"ny_next_level":38,"ny_express":219679},{"ny_name":38,"ny_next_level":39,"ny_express":237335},{"ny_name":39,"ny_next_level":40,"ny_express":255953},{"ny_name":40,"ny_next_level":41,"ny_express":306402},{"ny_name":41,"ny_next_level":42,"ny_express":357124},{"ny_name":42,"ny_next_level":43,"ny_express":408275},{"ny_name":43,"ny_next_level":44,"ny_express":461797},{"ny_name":44,"ny_next_level":45,"ny_express":516128},{"ny_name":45,"ny_next_level":46,"ny_express":569145},{"ny_name":46,"ny_next_level":47,"ny_express":626871},{"ny_name":47,"ny_next_level":48,"ny_express":683986},{"ny_name":48,"ny_next_level":49,"ny_express":741324},{"ny_name":49,"ny_next_level":50,"ny_express":798861},{"ny_name":50,"ny_next_level":51,"ny_express":998050},{"ny_name":51,"ny_next_level":52,"ny_express":998247},{"ny_name":52,"ny_next_level":53,"ny_express":997091},{"ny_name":53,"ny_next_level":54,"ny_express":998539},{"ny_name":54,"ny_next_level":55,"ny_express":998289},{"ny_name":55,"ny_next_level":56,"ny_express":984839},{"ny_name":56,"ny_next_level":57,"ny_express":998806},{"ny_name":57,"ny_next_level":58,"ny_express":998043},{"ny_name":58,"ny_next_level":59,"ny_express":998814},{"ny_name":59,"ny_next_level":60,"ny_express":997803},{"ny_name":60,"ny_next_level":61,"ny_express":1990775},{"ny_name":61,"ny_next_level":62,"ny_express":1996853},{"ny_name":62,"ny_next_level":63,"ny_express":1995957},{"ny_name":63,"ny_next_level":64,"ny_express":1996525},{"ny_name":64,"ny_next_level":65,"ny_express":1996257},{"ny_name":65,"ny_next_level":66,"ny_express":2497615},{"ny_name":66,"ny_next_level":67,"ny_express":2497595},{"ny_name":67,"ny_next_level":68,"ny_express":2491658},{"ny_name":68,"ny_next_level":69,"ny_express":2496312},{"ny_name":69,"ny_next_level":70,"ny_express":2496505},{"ny_name":70,"ny_next_level":71,"ny_express":2998993},{"ny_name":71,"ny_next_level":72,"ny_express":2997102},{"ny_name":72,"ny_next_level":73,"ny_express":2985623},{"ny_name":73,"ny_next_level":74,"ny_express":2990202},{"ny_name":74,"ny_next_level":75,"ny_express":2997966},{"ny_name":75,"ny_next_level":76,"ny_express":2996421},{"ny_name":76,"ny_next_level":77,"ny_express":2989781},{"ny_name":77,"ny_next_level":78,"ny_express":2998462},{"ny_name":78,"ny_next_level":79,"ny_express":2990320},{"ny_name":79,"ny_next_level":80,"ny_express":2996903},{"ny_name":80,"ny_next_level":81,"ny_express":4993822},{"ny_name":81,"ny_next_level":82,"ny_express":4985173},{"ny_name":82,"ny_next_level":83,"ny_express":4981731},{"ny_name":83,"ny_next_level":84,"ny_express":4990328},{"ny_name":84,"ny_next_level":85,"ny_express":4994076},{"ny_name":85,"ny_next_level":86,"ny_express":6986153},{"ny_name":86,"ny_next_level":87,"ny_express":6997058},{"ny_name":87,"ny_next_level":88,"ny_express":6997058},{"ny_name":88,"ny_next_level":89,"ny_express":6997058},{"ny_name":89,"ny_next_level":90,"ny_express":6994719},{"ny_name":90,"ny_next_level":91,"ny_express":8991237},{"ny_name":91,"ny_next_level":92,"ny_express":8981901},{"ny_name":92,"ny_next_level":93,"ny_express":8996867},{"ny_name":93,"ny_next_level":94,"ny_express":8996867},{"ny_name":94,"ny_next_level":95,"ny_express":8996867},{"ny_name":95,"ny_next_level":96,"ny_express":11994483},{"ny_name":96,"ny_next_level":97,"ny_express":11982415},{"ny_name":97,"ny_next_level":98,"ny_express":11944094},{"ny_name":98,"ny_next_level":99,"ny_express":11992233},{"ny_name":99,"ny_next_level":100,"ny_express":11992233}];
+        var rangeList = document.querySelectorAll('input[type="range"]');
+        for (var i = 0, len = rangeList.length; i < len; i++) {
+            rangeList[i].addEventListener('input', function () {
+                document.getElementById(this.id + '-val').innerHTML = this.value;
+
+                calc();
+            });
+        }
+        calc();
+        function calc() {
+            var total = 0;
+            var min = document.getElementById("block-range-begin-val").innerHTML * 1;
+            var max = document.getElementById("block-range-end-val").innerHTML * 1;
+            for (var i = 1; i <= expressList.length; i++) {
+                if (i >= min && i < max) {
+                    total += expressList[i - 1]["ny_express"];
+                }
+            }
+
+
+            var totaldesc = "";
+            if (total > 10000) {
+                totaldesc = (total / 10000).toFixed(2) + "万";
+            }
+            else {
+                totaldesc = total;
+            }
+            if (min >= max) {
+                totaldesc = "起始等级需小于目标等级！"
+                document.getElementById("huojiancount").style.display = "none";
+            }
+            else {
+                document.getElementById("huojiancount").style.display = "block";
+            }
+
+            var huojiancunt = (total / 5000).toFixed(2);
+            document.getElementById("huojiancunt").innerHTML = huojiancunt;
+
+            document.getElementById("total").innerHTML = totaldesc;
+        }
+      
+    </script>
+</body>
+</html>
