@@ -35,7 +35,8 @@
             弹幕信息
             <div class="sel_title">查询周期:
                 <select class="sel" name="" @change="selDanmu" v-model="dmTime"  id="">
-                    <option value="day_1">一天</option>
+                    <option value="day_0">今天天</option>
+                    <option value="day_1">昨天</option>
                     <option value="day_7">七天</option>
                     <option value="day_30">一个月</option>
                     <option value="day_all">全部</option>
@@ -70,7 +71,7 @@ export default {
                 {field: 'content', title: '弹幕内容', width: '230',titleAlign: 'center',columnAlign:'center'}
             ],
             yhTime:0,
-            dmTime:'day_1'
+            dmTime:'day_0'
         }
     },
     components:{
@@ -127,7 +128,7 @@ export default {
                     }
                 ).then((res)=>{
                     if(res.data.status=="success"){
-                        setLocal('danmu'+this.user.nickname+'date'+date,res.data.danmu);
+                        setLocal('danmu'+this.user.nickname+'date'+this.dmTime,res.data.danmu);
                         let danmu=res.data.danmu;
                         danmu.forEach((el,ind) => {
                             el.index=ind+1;
