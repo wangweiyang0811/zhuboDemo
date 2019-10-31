@@ -4,13 +4,16 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import $ from 'jquery'
 import moment from 'moment'
 // 引入样式
 import 'vue-easytable/libs/themes-base/index.css'
+import 'element-ui/lib/theme-chalk/index.css';
 // 导入 table 和 分页组件
 import {VTable,VPagination} from 'vue-easytable'
 import loading from './Loading.js'
 import vMessage from './components/Message/index' 
+import { Pagination } from 'element-ui'
 // 注册到全局
 
 Vue.component(VTable.name, VTable)
@@ -19,7 +22,7 @@ Vue.component(VPagination.name, VPagination)
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios;
 Vue.prototype.$store=store;
-
+Vue.use(Pagination);
 Vue.use(loading)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vMessage);
@@ -44,6 +47,7 @@ new Vue({
 window.setLocal=setLocal;
 window.getLocal=getLocal;
 window.moment=moment;
+window.$=$;
 function setLocal(key,val){
   let value={
     data:val,

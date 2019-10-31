@@ -51,7 +51,17 @@
             :show-vertical-border="true"
             ></v-table>
         </div>
-        
+        <div class="pagination">
+            <el-pagination
+            layout="total,prev, pager, next"
+            :total="danmuAllcount"
+            :pager-count='5'
+            :hide-on-single-pag='true'
+            :current-page.sync='pageIndex'
+            @current-change='pageChange'
+            >
+            </el-pagination>
+        </div>
     </div>
 </template>
 <script>
@@ -71,7 +81,9 @@ export default {
                 {field: 'content', title: '弹幕内容', width: '230',titleAlign: 'center',columnAlign:'center'}
             ],
             yhTime:0,
-            dmTime:'day_0'
+            dmTime:'day_0',
+            danmuAllcount:0,
+            pageIndex:1
         }
     },
     components:{
@@ -81,14 +93,21 @@ export default {
         this.getRouterParams()
     },
     mounted(){
-        this.getDanmu(moment(new Date()).add('-'+this.dmTime,'days').format('YYYY-MM-DD'));
-        
+        this.getDanmu();
     },
     methods:{
         selDanmu(){
-            this.getDanmu(moment(new Date()).add('-'+this.dmTime,'days').format('YYYY-MM-DD'));
+            if(this.pageIndex!==1){
+                this.pageIndex=1;
+            }else{
+                this.getDanmu();
+            }
+        },
+        pageChange(o){
+            this.getDanmu();
         },
         selyh(){
+            this.danmuAllcount-=50
             let a=getLocal('detail'+this.user.nickname+'day'+this.yhTime);
             if(a){
                 this.user=a;
@@ -111,7 +130,7 @@ export default {
         getRouterParams(){
             this.user=this.$route.params;
         },
-        getDanmu(date){
+        getDanmu(){
             let a=getLocal('danmu'+this.user.nickname+'date'+this.dmTime);
             if(a){
                 let danmu=a;
@@ -123,7 +142,8 @@ export default {
                 this.$axios.post('/openapi/user/danmu?access_token='+this.$store.state.token,
                     {
                         user_nickname: this.user.nickname,
-                        date:this.dmTime
+                        date:this.dmTime,
+                        limit:10
                         // date:date
                     }
                 ).then((res)=>{
@@ -180,6 +200,11 @@ export default {
     font-size: 15px;
     line-height: 40px;
     color: #999;
+}
+.pagination{
+    width: 100%;
+    background: #fff;
+    
 }
 .data{
     height: 80px;

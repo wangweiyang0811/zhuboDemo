@@ -8,7 +8,7 @@
 			</div>
 			<div class="btn-box" @click="search(1)">
 				<img src="../../public/images/yh.png" alt="">
-				查询用户
+				弹幕查询
 			</div>
 			<div class="btn-box" @click="search(2)">
 				<img src="../../public/images/gh.png" alt="">

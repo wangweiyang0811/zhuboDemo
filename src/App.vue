@@ -62,4 +62,10 @@ li{
     background: #999 !important;
     color: #fff;
 }
+.v-page-ul{
+  width: 100% !important;
+}
+.el-pager{
+  background: #fff
+}
 </style>
