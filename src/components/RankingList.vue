@@ -5,7 +5,8 @@
             <div class="list-box" :style="{width:rank.length*33+'vw'}">
                 <div class="list-li"  v-for="item in rank" :key="item.index">
                     <img :src="item.avatar" alt="">
-                    <div>{{item.nickname}}({{item.room_id}})</div>
+                    <div>{{item.nickname}}</div>
+                    <div>{{item.room_id}}</div>
                     <div v-show='!sr'>热度:{{item.active_users}}</div>
                     <div v-show='sr'>收入:{{item.income}}</div>
                 </div>
@@ -56,6 +57,7 @@ export default {
         background: #fff;
         .list-li{
             padding-top:15px;
+            padding-bottom: 5px;
             width: 33vw;
             min-height: 100%;
             text-align: center;

@@ -23,7 +23,7 @@
                 <div class="gh-title">工会介绍</div>
             </div>
         </div>
-        <RankingList content="热度排行 Top3" :sr='false'  :rank='rank.slice(0,3)'/>
+        <RankingList content="热度排行 Top3" :sr='false'  :rank='hotRank'/>
         <RankingList content="收入排行 Top3"  :rank='rank.slice(0,3)'/>
         <div class="rank">
             <div class="m-title">主播收入排名 Top10</div>
@@ -72,7 +72,8 @@ export default {
             club:{
                 
             },
-            rank:[]
+            rank:[],
+            hotRank:[]
         }
     },
     created(){
@@ -118,8 +119,29 @@ export default {
                     }
                 })
             }
-            
+            this.getHotRank();
         },
+        getHotRank(){
+            let arr=JSON.parse(JSON.stringify(this.rank));
+            if(!arr || arr.length==0){
+                this.hotRank=[];
+                return ;
+            }
+            let hotRank=[];
+            for(let i = 0;i< 3 ;i++ ){
+                let item=arr[0];
+                let index=0;
+                arr.forEach((element,ind) => {
+                    if(element.active_users>item.active_users){
+                        item=element;
+                        index=ind;
+                    }
+                });
+                hotRank.push(item);
+                arr.splice(index,1);
+            }
+            this.hotRank=hotRank;
+        }
     }
 }
 </script>
