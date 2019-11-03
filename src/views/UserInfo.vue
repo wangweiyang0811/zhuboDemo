@@ -55,7 +55,7 @@
             <el-pagination
             layout="prev, pager, next"
             :total="total"
-            :page-size.sync="20"
+            :page-size="20"
             :pager-count='5'
             :hide-on-single-pag='true'
             :current-page.sync='pageIndex'
