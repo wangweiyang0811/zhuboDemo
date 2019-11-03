@@ -54,7 +54,7 @@
         <div class="pagination">
             <el-pagination
             layout="total,prev, pager, next"
-            :total="danmuAllcount"
+            :total="total"
             :pager-count='5'
             :hide-on-single-pag='true'
             :current-page.sync='pageIndex'
@@ -82,8 +82,9 @@ export default {
             ],
             yhTime:0,
             dmTime:'day_0',
-            danmuAllcount:0,
-            pageIndex:1
+            total:0,
+            pageIndex:1,
+            currentCount:20
         }
     },
     components:{
@@ -107,7 +108,6 @@ export default {
             this.getDanmu();
         },
         selyh(){
-            this.danmuAllcount-=50
             let a=getLocal('detail'+this.user.nickname+'day'+this.yhTime);
             if(a){
                 this.user=a;
@@ -131,29 +131,31 @@ export default {
             this.user=this.$route.params;
         },
         getDanmu(){
-            let a=getLocal('danmu'+this.user.nickname+'date'+this.dmTime);
+            let a=getLocal('danmu'+this.user.nickname+'date'+this.dmTime+'page'+this.pageIndex);
             if(a){
-                let danmu=a;
+                let danmu=a.danmu;
                 danmu.forEach((el,ind) => {
-                    el.index=ind+1;
+                    el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                 });
                 this.danmu=danmu;
+                this.total=a.total;
             }else{
                 this.$axios.post('/openapi/user/danmu?access_token='+this.$store.state.token,
                     {
                         user_nickname: this.user.nickname,
                         date:this.dmTime,
-                        limit:10
-                        // date:date
+                        limit:this.currentCount,
+                        page:this.pageIndex
                     }
                 ).then((res)=>{
                     if(res.data.status=="success"){
-                        setLocal('danmu'+this.user.nickname+'date'+this.dmTime,res.data.danmu);
+                        setLocal('danmu'+this.user.nickname+'date'+this.dmTime+'page'+this.pageIndex,res.data);
                         let danmu=res.data.danmu;
                         danmu.forEach((el,ind) => {
-                            el.index=ind+1;
+                            el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                         });
                         this.danmu=danmu; 
+                        this.total=res.data.total;
                     }else{
                         this.$message.info('请求错误!') 
                     }

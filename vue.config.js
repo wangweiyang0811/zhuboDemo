@@ -5,7 +5,7 @@ module.exports = {
             '/openapi': {
                 target: 'https://www.doseeing.com/openapi',
                 ws: true,
-                secure: false,
+                secure: true,
                 changeOrigin: true ,  
                 pathRewrite:{
                     '^/openapi':''
