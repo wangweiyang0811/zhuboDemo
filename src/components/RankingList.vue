@@ -7,8 +7,8 @@
                     <img :src="item.avatar" alt="">
                     <div>{{item.nickname}}</div>
                     <div>{{item.room_id}}</div>
-                    <div v-show='!sr'>热度:{{item.active_users}}</div>
-                    <div v-show='sr'>收入:{{item.income}}</div>
+                    <div v-show='!sr'>平均热度:{{Math.ceil(item.active_users/7)}}</div>
+                    <div v-show='sr'>平均收入:{{Math.ceil(item.income/7)}}</div>
                 </div>
             </div>
         </div>

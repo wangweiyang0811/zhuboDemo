@@ -23,10 +23,10 @@
                 <div class="gh-title">工会介绍</div>
             </div>
         </div>
-        <RankingList content="热度排行 Top3" :sr='false'  :rank='hotRank'/>
-        <RankingList content="收入排行 Top3"  :rank='rank.slice(0,3)'/>
+        <RankingList content="近7日收入排名 Top3"  :rank='rank.slice(0,3)'/>
+        <RankingList content="近7日热度排名 Top3" :sr='false'  :rank='rank.slice(0,3)'/>
         <div class="rank">
-            <div class="m-title">主播收入排名 Top10</div>
+            <div class="m-title">近7日收入排名 Top10</div>
             <div class="rank-box">
                 <div class="none" v-show="none">暂时没有数据!</div>
                 <div class="rank_li" v-for="(item,index) in rank" :key="item.index">
@@ -35,13 +35,11 @@
                         <img :src="item.avatar" alt="">
                         <div>{{item.nickname}}({{item.room_id}})</div>
                     </div>
-                    
                     <div class="rank_info">
                         <div class="wp">
                             <div>平台：斗鱼</div>
                             <div>分类：{{item.category}}</div>
                         </div>
-                        
                         <div>弹幕人数：{{item.danmu_users}}</div>
                         <div>付费人数：{{item.income_users}}</div>
                         <div>活跃人数：{{item.active_users}}</div>
@@ -73,7 +71,7 @@ export default {
                 
             },
             rank:[],
-            hotRank:[]
+            llRank:[]
         }
     },
     created(){
@@ -119,28 +117,6 @@ export default {
                     }
                 })
             }
-            this.getHotRank();
-        },
-        getHotRank(){
-            let arr=JSON.parse(JSON.stringify(this.rank));
-            if(!arr || arr.length==0){
-                this.hotRank=[];
-                return ;
-            }
-            let hotRank=[];
-            for(let i = 0;i< 3 ;i++ ){
-                let item=arr[0];
-                let index=0;
-                arr.forEach((element,ind) => {
-                    if(element.active_users>item.active_users){
-                        item=element;
-                        index=ind;
-                    }
-                });
-                hotRank.push(item);
-                arr.splice(index,1);
-            }
-            this.hotRank=hotRank;
         }
     }
 }
