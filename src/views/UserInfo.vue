@@ -99,11 +99,8 @@ export default {
     },
     methods:{
         selDanmu(){
-            if(this.pageIndex!==1){
-                this.pageIndex=1;
-            }else{
-                this.getDanmu();
-            }
+            this.pageIndex=1;
+            this.getDanmu();
         },
         pageChange(o){
             this.getDanmu();

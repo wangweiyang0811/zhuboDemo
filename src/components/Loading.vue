@@ -48,7 +48,7 @@ export default {
   font-family: "微软雅黑";
   text-align: center;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 999;
