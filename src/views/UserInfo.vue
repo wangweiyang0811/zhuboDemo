@@ -53,8 +53,9 @@
         </div>
         <div class="pagination">
             <el-pagination
-            layout="total,prev, pager, next"
+            layout="prev, pager, next"
             :total="total"
+            :page-size.sync="20"
             :pager-count='5'
             :hide-on-single-pag='true'
             :current-page.sync='pageIndex'
@@ -138,7 +139,7 @@ export default {
                     el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                 });
                 this.danmu=danmu;
-                this.total=a.total;
+                this.total=a.total*this.currentCount;
             }else{
                 this.$axios.post('/openapi/user/danmu?access_token='+this.$store.state.token,
                     {
@@ -155,7 +156,7 @@ export default {
                             el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                         });
                         this.danmu=danmu; 
-                        this.total=res.data.total;
+                        this.total=res.data.total*this.currentCount;
                     }else{
                         this.$message.info('请求错误!') 
                     }
