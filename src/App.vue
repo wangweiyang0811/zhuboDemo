@@ -58,12 +58,13 @@ li{
     line-height: 40px;
     background: #fafafa;
   }
-.v-table-header{
-    background: #999 !important;
-    color: #fff;
+.el-message-box{
+  width: 90% !important;
+  max-width: 500px !important;
 }
-.v-page-ul{
-  width: 100% !important;
+.el-message{
+  min-width: 330px !important;
+  width: 98vw !important;
 }
 .el-pager{
   background: #fff

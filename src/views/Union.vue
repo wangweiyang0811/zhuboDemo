@@ -7,21 +7,12 @@
             </div>
             <div class="hyzbs">
                 <div>活跃主播</div>
-                <div class="hy">{{club.active_rooms}}</div>
+                <div class="hy">{{club.active_rooms || 'xxx'}}</div>
             </div>
             <div class="uname">
-                <div class="name">{{club.club}}</div>
-                
-                <button class="des orange" @click="alert=true">工会介绍</button>
+                <div class="name">{{club.club || 'xxx'}}</div>
+                <button class="des orange" @click="open">工会介绍</button>
             </div>  
-        </div>
-        <div class="model" v-show="alert">
-            <div class="alert">
-                
-                <span class="close" @click="alert=false">X</span>
-                {{club.description.length==0?'该工会还没有介绍!':club.description}}
-                <div class="gh-title">工会介绍</div>
-            </div>
         </div>
         <RankingList content="近7日收入排名 Top3"  :rank='rank.slice(0,3)'/>
         <RankingList content="近7日热度排名 Top3" :sr='false'  :rank='rank.slice(0,3)'/>
@@ -71,7 +62,8 @@ export default {
                 
             },
             rank:[],
-            llRank:[]
+            llRank:[],
+            des:''
         }
     },
     created(){
@@ -88,6 +80,14 @@ export default {
             if(this.$route.params.club){
                 this.club=this.$route.params.club;
             }
+        },
+        open(){
+        this.$alert(this.des.length==0?'该工会还没有介绍!':this.club.des, {
+            confirmButtonText: '确定',
+            title:'工会介绍',
+            showClose:false,
+            
+        });
         },
         getRank(){
             let a=getLocal('rank'+this.club.club);
@@ -113,7 +113,12 @@ export default {
                             }
                         }
                     }else{
-                        this.$message.info('查询失败!') 
+                        this.$message({
+                            message: '查询失败!',
+                            type: 'error',
+                            offset:'150',
+                            duration:'2000'
+                         })
                     }
                 })
             }
