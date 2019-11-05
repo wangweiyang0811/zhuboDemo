@@ -157,7 +157,7 @@ export default {
                     el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                 });
                 this.danmu=danmu;
-                this.total=a.total*this.currentCount;
+                this.total=a.record_total;
             }else{
                 this.$axios.post('/openapi/user/danmu?access_token='+this.$store.state.token,
                     {
@@ -174,7 +174,7 @@ export default {
                             el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                         });
                         this.danmu=danmu; 
-                        this.total=res.data.total*this.currentCount;
+                        this.total=res.data.record_total;
                     }else{
                         this.$message({
                             message: '请求错误!',
