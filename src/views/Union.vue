@@ -37,10 +37,8 @@
                         <div>开播分钟数：{{item.live_minutes}}</div>
                         <div>总收入：{{item.income}}</div>
                     </div>
-                    
                 </div>
             </div>
-            
         </div>
     </div>
 </template>
@@ -57,13 +55,9 @@ export default {
         return{
             name:'',
             none:true,
-            alert:false,
-            club:{
-                
-            },
+            club:{},
             rank:[],
             llRank:[],
-            des:''
         }
     },
     created(){
@@ -82,11 +76,10 @@ export default {
             }
         },
         open(){
-        this.$alert(this.des.length==0?'该工会还没有介绍!':this.club.des, {
+        this.$alert(this.club.description || '该工会还没有介绍!', {
             confirmButtonText: '确定',
             title:'工会介绍',
             showClose:false,
-            
         });
         },
         getRank(){
