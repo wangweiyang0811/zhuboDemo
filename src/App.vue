@@ -58,14 +58,33 @@ li{
     line-height: 40px;
     background: #fafafa;
   }
-.v-table-header{
-    background: #999 !important;
-    color: #fff;
+.el-message-box{
+  width: 90% !important;
+  max-width: 500px !important;
 }
-.v-page-ul{
-  width: 100% !important;
+.el-message{
+  min-width: 330px !important;
+  width: 98vw !important;
 }
 .el-pager{
   background: #fff
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 146, 146, 0.7);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ffffff;
 }
 </style>

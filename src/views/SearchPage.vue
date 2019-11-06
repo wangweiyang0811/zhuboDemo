@@ -81,7 +81,12 @@ export default {
                             params:res.data.room
                         })
                     }else{
-                        this.$message.info('房间ID有误!') 
+                        this.$message({
+                            message: '房间ID有误!',
+                            type: 'error',
+                            offset:'150',
+                            duration:'2000'
+                         })
                     }
                 })
             }
@@ -100,7 +105,12 @@ export default {
                     }
                 ).then((res)=>{
                     if(res.data.status!="success"){
-                        this.$message.info('昵称有误!') 
+                         this.$message({
+                            message: '昵称有误!',
+                            type: 'error',
+                            offset:'150',
+                            duration:'2000'
+                         })
                     }else{
                         setLocal('detail'+this.id+'day'+0,res.data.user);
                         this.$router.push({name:`${this.info.type}`,
@@ -137,10 +147,20 @@ export default {
                                 }
                             })
                         }else{
-                            this.$message.info('公会名有误!') 
+                            this.$message({
+                                message: '公会名有误!',
+                                type: 'error',
+                                offset:'150',
+                                duration:'2000'
+                            })
                         }
                     }else{
-                        this.$message.info('查询失败!') 
+                        this.$message({
+                            message: '查询失败!',
+                            type: 'error',
+                            offset:'150',
+                            duration:'2000'
+                         })
                     }
                 })
             }

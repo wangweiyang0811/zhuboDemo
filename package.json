@@ -24,7 +24,6 @@
     "@vue/cli-service": "^3.12.0",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
-    "vue-easytable": "^1.7.2",
     "vue-template-compiler": "^2.6.10"
   }
 }

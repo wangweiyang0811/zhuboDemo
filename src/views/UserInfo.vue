@@ -44,12 +44,37 @@
             </div>
         </div>
         <div class="tab">
-            <v-table
-            :width='630'
-            :columns="title"
-            :table-data="danmu"
-            :show-vertical-border="true"
-            ></v-table>
+            <el-table
+            :data="danmu"
+            style="width: 100%"
+            border
+            size='mini'>
+            <el-table-column
+                prop="index"
+                label="序号"
+                width="45">
+            </el-table-column>
+            <el-table-column
+                prop="time"
+                label="发送时间"
+                width="90">
+            </el-table-column>
+            <el-table-column
+                prop="room_id"
+                label="直播间ID"
+                width="80">
+            </el-table-column>
+            <el-table-column
+                prop="room_nickname"
+                label="主播昵称"
+                width="110">
+            </el-table-column>
+            <el-table-column
+                prop="content"
+                label="内容"
+                width="180">
+            </el-table-column>
+            </el-table>
         </div>
         <div class="pagination">
             <el-pagination
@@ -70,17 +95,8 @@ import Title from "@/components/Title.vue"
 export default {
     data(){
         return{
-            user:{
-                
-            },
+            user:{},
             danmu:[],
-            title:[
-                {field: 'index', title:'序号', width: '50', titleAlign: 'center',columnAlign:'center'},
-                {field: 'time', title:'发送时间', width: '150', titleAlign: 'center',columnAlign:'center'},
-                {field: 'room_id', title: '直播间ID', width: '80', titleAlign: 'center',columnAlign:'center'},
-                {field: 'room_nickname', title: '主播昵称', width: '120', titleAlign: 'center',columnAlign:'center'},
-                {field: 'content', title: '弹幕内容', width: '230',titleAlign: 'center',columnAlign:'center'}
-            ],
             yhTime:0,
             dmTime:'day_0',
             total:0,
@@ -120,7 +136,12 @@ export default {
                         setLocal('detail'+this.user.nickname+'day'+this.yhTime,res.data.user);
                         this.user=res.data.user;
                     }else{
-                        this.$message.info('请求错误!') 
+                        this.$message({
+                            message: '请求错误!',
+                            type: 'error',
+                            offset:'150',
+                            duration:'2000'
+                         })
                     }
                 })
             }
@@ -136,7 +157,7 @@ export default {
                     el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                 });
                 this.danmu=danmu;
-                this.total=a.total*this.currentCount;
+                this.total=a.record_total;
             }else{
                 this.$axios.post('/openapi/user/danmu?access_token='+this.$store.state.token,
                     {
@@ -153,9 +174,14 @@ export default {
                             el.index=this.currentCount*(this.pageIndex-1)+ind+1;
                         });
                         this.danmu=danmu; 
-                        this.total=res.data.total*this.currentCount;
+                        this.total=res.data.record_total;
                     }else{
-                        this.$message.info('请求错误!') 
+                        this.$message({
+                            message: '请求错误!',
+                            type: 'error',
+                            offset:'150',
+                            duration:'2000'
+                         })
                     }
                 })
             }
