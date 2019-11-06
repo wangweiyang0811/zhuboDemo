@@ -27,7 +27,9 @@ Vue.use(loading)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vMessage);
 axios.interceptors.request.use(function(config){
-  store.state.isShow=true;
+  if(config.url.indexOf('club_search')==-1){
+    store.state.isShow=true;
+  }
   return config
 })
 //定义一个响应拦截器

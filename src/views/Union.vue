@@ -24,7 +24,7 @@
             </div>
         </div>
         <RankingList content="近7日收入排名 Top3"  :rank='rank.slice(0,3)'/>
-        <RankingList content="近7日热度排名 Top3" :sr='false'  :rank='rank.slice(0,3)'/>
+        <RankingList content="近7日热度排名 Top3" :sr='false'  :rank='online.slice(0,3)'/>
         <div class="rank">
             <div class="m-title">近7日收入排名 Top10</div>
             <div class="rank-box">
@@ -46,7 +46,6 @@
                         <div>开播分钟数：{{item.live_minutes}}</div>
                         <div>总收入：{{item.income}}</div>
                     </div>
-                    
                 </div>
             </div>
             
@@ -71,12 +70,13 @@ export default {
                 
             },
             rank:[],
-            llRank:[]
+            online:[]
         }
     },
     created(){
          this.getparams();
          this.getRank();
+         this.getOnline();
     },
     mounted(){
         if(this.rank.length==0){
@@ -111,6 +111,29 @@ export default {
                             if(this.rank.length!==0){
                                 this.none=false;
                             }
+                        }
+                    }else{
+                        this.$message.info('查询失败!') 
+                    }
+                })
+            }
+        },
+        getOnline(){
+            let a=getLocal('online'+this.club.club);
+            if(a){
+                this.online=a;
+            }else{
+                this.$axios.post('/openapi/rank?access_token='+this.$store.state.token,
+                    {
+                        club:this.club.club ,
+                        sort: 'online',
+                        limit: 10 
+                    }
+                ).then((res)=>{
+                    if(res.data.status){
+                        if(res.data.status=='success'){
+                            setLocal('online'+this.club.club,res.data.rank);
+                            this.online=res.data.rank;
                         }
                     }else{
                         this.$message.info('查询失败!') 

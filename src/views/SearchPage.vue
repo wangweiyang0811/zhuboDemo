@@ -1,8 +1,12 @@
 <template>
     <div class="search-box">
         <!-- <Title back='true' msg='搜索页'></Title> -->
-        <input type="search" v-model="id" v-focus='true'  :placeholder="info.title">
+        <input type="search" v-model="id" v-focus='true' @input="getUnionName"  :placeholder="info.title">
         <button @click="search">查找</button>
+        <ul v-show="unionList.length > 0">
+            <li v-for="name in unionList" :key='name.index' @click='getUnion(name)'>{{name}}</li>
+        </ul>
+        <span v-show="unionList.length > 0">一共查询到：<b>{{unionList.length}}</b> 个结果</span>
     </div>
 </template>
 <script>
@@ -12,7 +16,8 @@ export default {
         return{
             id:'',
             info:'',
-            loading:false
+            loading:false,
+            unionList:[]
         }
     },
     components:{
@@ -106,7 +111,10 @@ export default {
             }
             
         },
-        getUnion(){
+        getUnion(name){
+            if(name){
+                this.id=name;
+            }
             let a=getLocal('club'+this.id);
             if(a){
                 this.$router.push({name:`${this.info.type}`,
@@ -138,6 +146,37 @@ export default {
             }
             
         },
+        getUnionName(){
+            if(this.info.type!=='Union'){
+                return ;
+            }
+            if(this.timeOut){
+                clearTimeout(this.timeOut);
+            }
+            this.timeOut=setTimeout(()=>{
+                let a=getLocal('clubName'+this.id);
+                if(a){
+                    this.unionList=a;
+                }else{
+                    this.$axios.post('/openapi/club_search?access_token='+this.$store.state.token,
+                        {
+                            q:this.id,
+                        },
+                    ).then((res)=>{
+                        if(res.data.status){
+                            if(res.data.status=='success'){
+                                setLocal('clubName'+this.id,res.data.result);
+                                this.unionList=res.data.result;
+                            }else{
+                                this.unionList=[];
+                            }
+                        }else{
+                            this.unionList=[];
+                        }
+                    })
+                }
+            },500)
+        }
     }
 }
 </script>
@@ -145,6 +184,7 @@ export default {
 .search-box{
     width:100%;
     padding-top:50px; 
+    position: relative;
     input{
         width: 80%;
         height: 40px;
@@ -167,6 +207,27 @@ export default {
     }
     input:focus{
         border: 1px solid rgb(65, 250, 157);
+    }
+    ul{
+        max-height: 320px;
+        overflow-y: scroll;
+        border: 1px solid #ddd;
+        border-top: 0;
+        background: #fff;
+        li{
+            height: 40px;
+            list-style: none;
+            padding-left: 10px;
+            line-height: 40px;
+        }
+    }
+    span{
+        padding-left: 10px;
+        line-height: 30px;
+        font-size: 14px;
+        b{
+            color: rgb(4, 111, 211)
+        }
     }
 }
 </style> 
