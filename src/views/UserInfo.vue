@@ -30,18 +30,9 @@
             <div class="danmu_count item">
                 <span>弹幕数量</span><div>{{user.danmu_count}}</div>
             </div>
-        </div>
+        </div> 
         <div class="danmu_title m-title">
             弹幕信息
-            <div class="sel_title">查询周期:
-                <select class="sel" name="" @change="selDanmu" v-model="dmTime"  id="">
-                    <option value="day_0">今天</option>
-                    <option value="day_1">昨天</option>
-                    <option value="day_7">七天</option>
-                    <option value="day_30">一个月</option>
-                    <option value="day_all">全部</option>
-                </select>
-            </div>
         </div>
         <div class="tab">
             <el-table
@@ -98,7 +89,6 @@ export default {
             user:{},
             danmu:[],
             yhTime:0,
-            dmTime:'day_0',
             total:0,
             pageIndex:1,
             currentCount:20
@@ -114,14 +104,11 @@ export default {
         this.getDanmu();
     },
     methods:{
-        selDanmu(){
-            this.pageIndex=1;
-            this.getDanmu();
-        },
         pageChange(o){
             this.getDanmu();
         },
         selyh(){
+            this.pageIndex=1;
             let a=getLocal('detail'+this.user.nickname+'day'+this.yhTime);
             if(a){
                 this.user=a;
@@ -145,24 +132,25 @@ export default {
                     }
                 })
             }
+            this.getDanmu();
         },
         getRouterParams(){
             this.user=this.$route.params;
         },
         getDanmu(){
-            let a=getLocal('danmu'+this.user.nickname+'date'+this.dmTime+'page'+this.pageIndex);
-            if(a){
-                let danmu=a.danmu;
-                danmu.forEach((el,ind) => {
-                    el.index=this.currentCount*(this.pageIndex-1)+ind+1;
-                });
-                this.danmu=danmu;
-                this.total=a.record_total;
-            }else{
+            // let a=getLocal('danmu'+this.user.nickname+'date'+this.dmTime+'page'+this.pageIndex);
+            // if(a){
+            //     let danmu=a.danmu;
+            //     danmu.forEach((el,ind) => {
+            //         el.index=this.currentCount*(this.pageIndex-1)+ind+1;
+            //     });
+            //     this.danmu=danmu;
+            //     this.total=a.record_total;
+            // }else{
                 this.$axios.post('/openapi/user/danmu?access_token='+this.$store.state.token,
                     {
                         user_nickname: this.user.nickname,
-                        date:this.dmTime,
+                        date:'day_'+this.yhTime,
                         limit:this.currentCount,
                         page:this.pageIndex
                     }
@@ -184,7 +172,7 @@ export default {
                          })
                     }
                 })
-            }
+            // }
             
         }
     }
