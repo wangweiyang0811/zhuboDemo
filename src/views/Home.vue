@@ -6,7 +6,7 @@
 				<img src="../../public/images/zb.png" alt="">
 				查询主播
 			</div>
-			<div class="btn-box" @click="search(1)">
+			<div id='dis' class="btn-box" @click="search(1)">
 				<img src="../../public/images/yh.png" alt="">
 				弹幕查询
 			</div>
@@ -60,6 +60,9 @@ export default {
 	},
 	methods: {
 		search(type) {
+			if(type==1){
+				return 
+			}
 			this.$router.push({ 
 				name: "SearchPage" ,
 				params:this.info[type]
@@ -116,5 +119,7 @@ div{
 	font-size: 1.5rem;
 	text-align: center
 }
-
+#dis{
+	filter: brightness(0.7)
+}
 </style>
