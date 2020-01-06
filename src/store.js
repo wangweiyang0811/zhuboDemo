@@ -22,11 +22,15 @@ export default new Vuex.Store({
           timeout: 10000
         })
         .then((result) => {
+          if(result.data.access_token){
             state.token=result.data.access_token;
             localStorage.setItem('token',state.token);
             canuse();
+          }else{
+            alert('获取权限失败！');
+          }
         }).catch((err) => {
-          alert('请求token失败，点击确定重新请求');
+          alert('获取权限失败！');
           this.commit('getToken')
         });
       }
