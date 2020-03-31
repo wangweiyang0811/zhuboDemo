@@ -2,15 +2,15 @@
 	<div class="home">
 		<Slider /><!-- 首页轮播图  在components/Slideshow里-->
 		<div class="link-box">
-			<div class="btn-box" @click="search(0)">
+			<div class="btn-box dis" @click="search(0)">
 				<img src="../../public/images/zb.png" alt="">
 				查询主播
 			</div>
-			<div id='dis' class="btn-box" @click="search(1)">
+			<div class="btn-box dis" @click="search(1)">
 				<img src="../../public/images/yh.png" alt="">
 				弹幕查询
 			</div>
-			<div class="btn-box" @click="search(2)">
+			<div class="btn-box dis" @click="search(2)">
 				<img src="../../public/images/gh.png" alt="">
 				查询工会
 			</div>
@@ -60,9 +60,10 @@ export default {
 	},
 	methods: {
 		search(type) {
-			if(type==1){
-				return 
-			}
+			return 
+			// if(type==1){
+				
+			// }
 			this.$router.push({ 
 				name: "SearchPage" ,
 				params:this.info[type]
@@ -119,7 +120,7 @@ div{
 	font-size: 1.5rem;
 	text-align: center
 }
-#dis{
-	filter: brightness(0.7)
+.dis{
+	filter: brightness(0.5)
 }
 </style>

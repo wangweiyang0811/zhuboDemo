@@ -16,7 +16,7 @@ export default{
     }
   },
   created(){
-    this.$store.dispatch('gettoken');
+    // this.$store.dispatch('gettoken');
   }
 }
 </script>
